@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hierarquia.css">
+    <style id="regras"></style>
+    <link rel="shortcut icon" href="/fav/favicon.ico" type="image/x-icon">
+    <title>PI 404</title>
+</head>
+<body>
+    <header>
+        <h1>PI <span class="vermelho">404</span> Hierarquia de seletores</h1>
+        <nav>
+            <ul class="itens-menu">
+                <li><a href="#hierarquia">Hierarquia</a></li>
+                <li><a href="#universal">Seletor Universal (*)</a></li>
+                <li><a href="#root">:root</a></li>
+                <li><a href="#link">:link</a></li>
+                <li><a href="#nth">:nth-child()</a></li>
+                <li><a href="#mais">combinador (+)</a></li>
+                <li><a href="#blur">backdrop-filter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hierarquia" id="hierarquia">
+            <h2>Hierarquia de seletores e especificidade</h2>
+            <p>Quando duas regras mudam a mesma propriedade do mesmo elemento, o navegador precisa escolher uma.
+                Essa escolha segue a hierarquia dos seletores, chamada de especificidade.</p>
+
+            <h3>Como o navegador decide</h3>
+            <ol>
+                <li>Compara a especificidade: quanto mais específico o seletor, maior o peso.</li>
+                <li>Se o peso empatar, vence a regra escrita por último no CSS.</li>
+                <li>O <code>!important</code> passa por cima de tudo (use só em último caso).</li>
+            </ol>
+
+            <h3>Tabela de pesos (inline - id - classe - elemento)</h3>
+            <table>
+                <thead>
+                    <tr><th>Tipo</th><th>Exemplo</th><th>Peso</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Estilo inline</td><td>style="color: green"</td><td>1-0-0-0</td></tr>
+                    <tr><td>id</td><td>#alvo</td><td>0-1-0-0</td></tr>
+                    <tr><td>Classe, pseudo-classe, atributo</td><td>.destaque, :hover, :nth-child()</td><td>0-0-1-0</td></tr>
+                    <tr><td>Elemento</td><td>p, h1, blockquote</td><td>0-0-0-1</td></tr>
+                    <tr><td>Universal</td><td>*</td><td>0-0-0-0</td></tr>
+                </tbody>
+            </table>
+            <p class="nota">Para somar, conte cada tipo.
+                Exemplo: <code>#menu a:hover</code> tem 1 id, 1 pseudo-classe e 1 elemento, ou seja, 0-1-1-1.</p>
+
+            <h3>Exemplo: quem vence?</h3>
+            <p>O elemento abaixo é <code>&lt;blockquote id="alvo" class="destaque"&gt;</code>.
+                Ative as regras da esquerda para a direita e veja que a última escrita nem sempre vence.</p>
+            <div class="exemplo-hierarquia">
+                <pre class="preCodigo" id="codigo">Nenhuma regra ativa.</pre>
+                <div class="painel">
+                    <div class="resultado-claro">
+                        <blockquote id="alvo" class="destaque">Qual cor eu vou ter?</blockquote>
+                        <p id="vencedora">Cor padrão do navegador.</p>
+                    </div>
+                    <div class="botoes">
+                        <button data-regra="id">#alvo (id)</button>
+                        <button data-regra="classe">.destaque (classe)</button>
+                        <button data-regra="elemento">blockquote (elemento)</button>
+                        <button data-regra="inline">style inline</button>
+                        <button id="limpar" class="sec">Limpar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="universal">
+            <h2>Seletor universal ( * )</h2>
+            <p>Seleciona todos os elementos. Ao ativar, cada elemento da caixa ganha uma borda tracejada.</p>
+            <div class="exemplo">
+                <pre class="preCodigo">.caixa.ativo * {
+  border: 1px dashed cyan;
+}</pre>
+                <div class="painel">
+                    <div class="resultado-claro">
+                        <div class="caixa" id="caixa">
+                            <p>Um parágrafo</p>
+                            <span>Um span</span>
+                            <button id= "botao" class="sec">Um botão</button>
+                        </div>
+                    </div>
+                    <div class="botoes">
+                        <button data-toggle="#caixa" data-on="Ativar *" data-off="Desativar *"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="root">
+            <h2>html e :root</h2>
+            <p>O :root é o próprio elemento html. Guarda variáveis do CSS inteiro, e o html define o tamanho base do texto.</p>
+            <h3>html</h3>
+            <P>Seleciona o elemento <html>, que é a raiz do documento HTML​</P>
+            <h3>:root​</h3>
+            <p>É uma pseudo-classe que representa o elemento raiz do documento.​</p>
+            <h3>Ou seja:​</h3>
+            <p>Em HTML, a tag <code>html</code> e a pseudo-classe <code>:root</code> correspondem ao elemento <html> ​</p>
+            <h3>ENTÃO PARA O QUE USAMOS :root?​</h3>
+            <p>:root é muito utilizado para criar variáveis CSS globais, que podem ser reutilizadas em diferentes partes do código.​</p>
+            <div class="exemplo">
+                <pre class="preCodigo">:root {
+  --cor-principal: teal;
+}
+.quadrado {
+  background: var(--cor-principal);
+}
+html.grande {
+  font-size: 22px;
+}</pre>
+                <div class="painel">
+                    <div class="resultado-claro"><div class="quadrado"></div></div>
+                    <div class="botoes">
+                        <button id="trocar">Trocar a variável</button>
+                        <button data-toggle="html" data-classe="grande" data-on="Aumentar fonte do html" data-off="Voltar fonte do html"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="link">
+            <h2>:link e :hover</h2>
+            <p>O link começa azul (:link) e fica vermelho com sublinhado quando o mouse passa por cima (:hover). O botão simula o :hover.</p>
+            <h3>:link​</h3>
+            <p>O :link é uma pseudo-classe do CSS que seleciona links que ainda não foram visitados. Ele permite estilizar a aparência desses links, como a cor e o sublinhado.​</p>
+            <p>Importante: O :link e o :visited são mutuamente exclusivos.​​</p>
+            <h3>:hover</h3>
+            <p>O :hover é uma pseudo-classe que permite mudar a aparência de um elemento quando o usuário passa o cursor mouse ele. É muito criar o cursor do mouse sobre ele. E muito usado para criar efeitos visuais e deixar o site mais interativo.O :hover é uma pseudo-classe que permite mudar a aparência de um elemento quando o usuário passa o cursor mouse ele. É muito criar o cursor do mouse sobre ele. E muito usado para criar efeitos visuais e deixar o site mais interativo.​</p>
+            <div class="exemplo">
+                <pre class="preCodigo">a:link {
+  color: blue;
+  text-decoration: none;
+}
+a:hover, a.ativo {
+  color: red;
+  text-decoration: underline;
+}</pre>
+                <div class="painel">
+                    <div class="resultado-claro"><a href="#link" class="demo" id="link-demo">Acesse o site</a></div>
+                    <div class="botoes">
+                        <button data-toggle="#link-demo" data-on="Simular :hover" data-off="Desfazer :hover"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nth">
+            <h2>:nth-child()</h2>
+            <p>Seleciona um elemento pela posição entre os irmãos. Aqui, o 2º item da lista.</p>
+            <p>A pseudo-classe :nth-child() permite selecionar um elemento de acordo com sua posição entre os elementos irmãos.​</p>
+            <div class="exemplo">
+                <pre class="preCodigo">.lista.ativo li:nth-child(2) {
+  background: gold;
+  color: black;
+}</pre>
+                <div class="painel">
+                    <div class="resultado-claro">
+                        <ul class="lista" id="lista">
+                            <li>Primeiro item</li>
+                            <li>Segundo item</li>
+                            <li>Terceiro item</li>
+                        </ul>
+                    </div>
+                    <div class="botoes">
+                        <button data-toggle="#lista" data-on="Ativar :nth-child(2)" data-off="Desativar :nth-child(2)"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mais">
+            <h2>Combinador +</h2>
+            <p>Seleciona o elemento que vem imediatamente depois de outro, se forem irmãos.</p>
+            <h3>Combinador de irmão adjacente</h3>
+            <p>O combinador + seleciona um elemento que aparece imediatamente depois de outro elemento, desde que sejam irmãos.​</p>
+            <div class="exemplo">
+                <pre class="preCodigo">.irmaos.ativo h4 + p {
+  color: blue;
+}</pre>
+                <div class="painel">
+                    <div class="resultado-claro irmaos" id="irmaos">
+                        <h4>Título</h4>
+                        <p>Este p vem logo depois do h4.</p>
+                        <p>Este p não é o vizinho direto.</p>
+                    </div>
+                    <div class="botoes">
+                        <button data-toggle="#irmaos" data-on="Ativar h4 + p" data-off="Desativar h4 + p"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blur">
+            <h2>Backdrop-filter</h2>
+            <p>Desfoca o que está atrás do elemento. A faixa está sobre dois círculos coloridos.</p>
+            <p>O backdrop-filter é uma propriedade do CSS que permite aplicar efeitos gráficos — como desfoque (blur), mudança de cor ou contraste — à área que fica atrás de um elemento. Em vez de alterar o elemento em si, ele age como se o elemento fosse uma lente ou um vidro que distorce ou recolore o que está no fundo.</p>
+            <h3>A Regra de Ouro</h3>
+            <p>1. O efeito só é visível se o elemento tiver um fundo parcialmente transparente.</p>
+            <p>2. Usar uma cor sólida (como background: white) bloqueia totalmente o efeito.</p>
+            <p>3. A solução: Sempre combinar com cores RGBA (ex: background-color: rgba(255, 255, 255, 0.2)).</p>
+            <h3>A Diferença entre filter e backdrop-filter</h3>
+            <p>1. filter: Aplica o efeito ao próprio elemento e a todo o seu conteúdo (incluindo textos e imagens filhas). Se você aplicar filter: blur(5px); a uma div, o texto dentro dela também ficará embaçado e ilegível.</p>
+            <p>2. backdrop-filter: Aplica o efeito apenas ao que está por trás do elemento. O conteúdo interno (como textos e botões) permanece 100% nítido, garantindo a legibilidade.</p>
+            <div class="exemplo">
+                <pre class="preCodigo">.fundo.ativo .vidro {
+  backdrop-filter: blur(10px);
+}</pre>
+                <div class="painel">
+                    <div class="resultado fundo" id="fundo">
+                        <span class="bola rosa"></span>
+                        <span class="bola azul"></span>
+                        <div class="vidro">Glassmorphism</div>
+                    </div>
+                    <div class="botoes">
+                        <button data-toggle="#fundo" data-on="Ativar desfoque" data-off="Desativar desfoque"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script src="mainFunction.js"></script>
+</body>
+</html>

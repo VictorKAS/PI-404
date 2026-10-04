@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="padrao.css">
+    <link rel="stylesheet" href="../scss/scss-principal.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Hierarquia DE seletores (*, root, html), pseudo-classe e combinador +</h1>
+        <nav>
+            <ul class="itens-menu">
+                <a href=""><li> Seletor Universal (*)</li></a>
+                <a href=""><li>:root</li></a>
+                <a href=""><li>:link</li></a>
+                <a href=""><li>:nth-child()</li></a>
+                <a href=""><li>combinador (+)</li></a>
+                <a href=""><li>backdropfilter</li></a>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hierarquia">
+            <div class="explicacao-hierarquia">
+                <h1>1. Hierarquia de seletores e especificidade</h1>
+                <p class="explicacao">Quando duas regras mudam a mesma propriedade do mesmo elemento, o navegador precisa escolher uma. 
+                    Essa escolha segue a hierarquia dos seletores, chamada de especificidade.</p>
+                
+                <h3>Como o navegador decide </h3>
+                <ol>
+                    <li>Quando duas regras mudam a mesma propriedade do mesmo elemento, 
+                        o navegador precisa escolher uma. Essa escolha segue a hierarquia dos seletores, 
+                        chamada de especificidade.</li>
+                    <li>Quando duas regras mudam a mesma propriedade do mesmo elemento, o navegador precisa escolher uma.
+                        Essa escolha segue a hierarquia dos seletores, chamada de especificidade.</li>
+                    <li>O !important passa por cima de tudo (use só em último caso).</li>
+                </ol>
+            </div>
+
+            <div class="explicacao-hierarquia">
+                <h3>Tabela de pesos (inline - id - classe - elemento)</h3>
+                <table>
+                    <tbody>
+                        <thead>
+                            <tr>
+                                <th>Tipo</th><th>Exemplo</th><th>Peso</th>
+                            </tr>
+                        </thead>  
+                            
+                            <tr> 
+                                <td>Estilo inline</td> <td>style="color: green"</td> <td>1-0-0-0</td>
+                            </tr>x
+                            <tr>
+                                <td>id</td> <td>#alvo</td ><td>0-1-0-0</td>
+                            </tr>
+                            <tr>
+                                <td>Classe, pseudo-classe, atributo</td> <td>.destaque, :hover, :nth-child()</td> <td>0-0-1-0</td>
+                            </tr>
+                            <tr>
+                                <td>Elemento</td> <td>	p, h1, blockquote</td> <td>0-0-0-1</td>
+                            </tr>
+                            <tr>
+                                <td>Universal</td> <td>*</td> <td>0-0-0-0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="texto-paragrafo">Para somar, conte cada tipo. 
+                    Exemplo: #menu a:hover tem 1 id, 1 pseudo-classe e 1 elemento, ou seja, 0-1-1-1.</p>
+            </div>
+            <div class="exemplo-hierarquia">
+                <div class="preCodigo">
+                    <p id="alvo"></p>
+                </div>
+                <div class="painel">
+                    <div class="resultado-claro">
+                        <blockquote class="destaque" id="alvo"></blockquote>
+                    </div>
+                    <div class="botoes">
+                        <button> #alvo (id) </button>
+                        <button> .destaque (classe) </button>
+                        <button> blockquote (elemento) </blockquote></button>
+                        <button> style inline </button>
+                        <button> Limpar </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+    </main>  
+    <script src="../js/mainFunction.js"></script>
+</body>
+</html> 

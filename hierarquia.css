@@ -1,0 +1,223 @@
+/* ===== PADRÃO (o que seria o padrao.css) ===== */
+
+/* seletor universal (*) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* html */
+html {
+    font-size: 18px;
+}
+html.grande {
+    font-size: 22px;
+}
+
+/* :root (variáveis globais) */
+:root {
+    --fundo:#070B24;
+    --card: #262626;
+    --cor-principal: teal;
+    --cor0: #04090b;
+    --cor1: #0c0f11;
+    --cor2: #2a292b;
+    --cor3: #312f32;
+    --cor4: #403c3f;
+    --cor5: #484245;
+}
+
+body {
+    background: var(--fundo);
+    color: white;
+    font-family: Arial, sans-serif;
+    line-height: 1.3;
+    margin: 0 auto;
+
+}
+
+header { 
+    background-image: linear-gradient(to bottom, #020617, #0a1250);
+    text-align: center;
+    min-height: 190px;
+    padding-top: 40px;
+    margin-bottom: 25px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.411);
+}
+main { 
+    padding: 24px;
+}
+section {
+    background-color: #0F1638;
+    max-width: 1100px;
+    margin: auto;
+    margin-bottom: 52px;
+    padding: 24px;
+    width: 80%;
+    border: 1px solid rgba(0, 0, 0, 0.111);
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.411);
+}
+.vermelho { color: #e8191a; }
+
+h2 { 
+    color: white;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.288);
+}
+h3 { margin: 20px 0 6px; }
+ol { padding-left: 24px; }
+code { color: orange; }
+
+button {
+    font: inherit;
+    font-size: 0.8rem;
+    background: #0a1250;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+button.sec { background: #ddd; }
+
+#limpar {
+    color: #000000;
+}
+
+#botao {
+    color: #000;
+}
+/* ===== MENU ===== */
+.itens-menu {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+.itens-menu a {
+    display: inline-block;
+    padding: 8px 16px;
+    color:#e8191a;
+    text-decoration: none;
+    border: 2px solid #e8191a;
+    border-radius: 8px;
+    transition: border-color 0.2s, color 0.2s;
+}
+.itens-menu a:hover {
+    color: chartreuse;
+    border-color: chartreuse;
+}
+
+/* combinador + (usado na própria página) */
+h2 + p {
+    color: orange;
+    margin: 4px 0 12px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.488);
+
+}
+.nota { margin: 8px 0; }
+
+/* ===== TABELA ===== */
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+th, td { border: 1px solid #000000; padding: 6px 10px; text-align: left; }
+th { background: #000000; }
+
+/* ===== LAYOUT DOS EXEMPLOS ===== */
+.exemplo,
+.exemplo-hierarquia {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+}
+.preCodigo {
+    background: var(--card);
+    color: orange;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    overflow-x: auto;
+}
+.painel { display: flex; flex-direction: column; gap: 8px; }
+.resultado,
+.resultado-claro {
+    border: 1px solid #3b4aa8;
+    border-radius: 8px;
+    padding: 40px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    flex: 1;
+}
+.resultado-claro { background: #eee; color: black; }
+.botoes { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ===== HIERARQUIA: o JS escreve as regras no <style id="regras"> ===== */
+blockquote { padding-left: 10px; border-left: 4px solid #999; }
+
+/* ===== EXEMPLO: seletor universal ===== */
+.caixa.ativo * {
+    border: 2px dashed rgb(0, 0, 0);
+}
+
+/* ===== EXEMPLO: :root e var() ===== */
+.quadrado {
+    width: 260px;
+    height: 160px;
+    background: var(--cor-principal);
+    margin: auto;
+}
+
+/* ===== EXEMPLO: :link e :hover ===== */
+a.demo:link {
+    color: blue;
+    text-decoration: none;
+}
+a.demo:hover,
+a.demo.ativo {
+    color: red;
+    text-decoration: underline;
+}
+
+/* ===== EXEMPLO: :nth-child() ===== */
+.lista { list-style: none; }
+.lista li { padding: 6px 10px; }
+.lista.ativo li:nth-child(2) {
+    background: gold;
+    color: black;
+}
+
+/* ===== EXEMPLO: combinador + ===== */
+.irmaos.ativo h4 + p {
+    color: blue;
+}
+
+/* ===== EXEMPLO: backdrop-filter ===== */
+.fundo {
+    background: #eee; 
+    color: #000000;
+    margin: 24px;
+}
+.fundo { position: relative; min-height: 140px; overflow: hidden; }
+.bola { position: absolute; width: 70px; height: 70px; border-radius: 50%; }
+.rosa { background: hotpink; top: 15px; left: 25px; }
+.azul { background: deepskyblue; bottom: 15px; right: 45px; }
+.vidro {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 45px;
+    padding: 16px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+}
+.fundo.ativo .vidro {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+

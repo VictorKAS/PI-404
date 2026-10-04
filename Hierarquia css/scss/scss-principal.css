@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* CONFIGURAÇÕES PADRÃO*/
+:root{
+    
+    --cor-principal: #0A1250; /*Cor do plano de fundo do site*/
+    --cor-secundaria:white; /*Cor de bordas e textos de conteúdo*/
+    --titulos: #00FFFF;
+    --paragrafo-explicacao: #B8C4FF;
+    
+}
+
+body{
+    background-color:var(--cor-principal);
+    color:var(--cor-secundaria);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10vh;    
+}
+
+h1{
+    color:var(--titulos);
+    margin-bottom: 2vh;
+}
+
+h3{
+    color:var(--cor-secundaria);
+    font-weight: bolder;
+    margin: 5vh 0 2vh 0;
+}
+
+a{
+    text-decoration: none;
+    
+}
+
+p.explicacao{
+    color:var(--paragrafo-explicacao);
+    font-size: 16pt;
+}
+
+
+/* MENU */
+
+nav{
+    display: flex;
+    justify-content: center;
+    margin: 5vh;
+    padding: 2vh;
+    border: 2px solid var(--cor-secundaria);
+    font-size: 12pt;
+}
+
+nav ul{
+    display: flex;
+    gap:2vw;
+    list-style: none;
+}
+
+nav ul li{
+    color: var(--cor-secundaria);
+    padding: 2vh;
+    
+}
+
+nav ul li:hover{
+    color: rgb(254, 214, 166);
+}
+
+
+/*SECTION HIERARQUIA */
+
+main{
+    max-width: 80vw;
+}
+
+section.hierarquia{
+    border: 2px solid var(--cor-secundaria);
+    padding: 2%;
+}
+
+div.explicacao-hierarquia{
+    padding: 2rem; /* Afasta o conteúdo das bordas da caixa */
+}
+
+ol{
+     padding: 1.5rem
+}
